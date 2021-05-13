@@ -11,9 +11,8 @@ import CoreData
 class HistoryViewController: UIViewController {
     
     
-
+    let dateFormater = DateFormatter()
     @IBOutlet weak var historyTableView: UITableView!
-   
     var items:[DailyData]?
     
     override func viewDidLoad() {
@@ -53,21 +52,54 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
         
         // get the data from the array and set the label
         let cellDailyData = items![indexPath.row]
+        dateFormater.dateStyle = .full
         cell.tableLabel.text = """
-            Date: \(cellDailyData.dateOfData!)
-            Readings
-            Fasting: \(cellDailyData.fastingData)
-            1: \(cellDailyData.oneData)
-            2: \(cellDailyData.twoData)
-            3: \(cellDailyData.threeData)
+            \(dateFormater.string(from: cellDailyData.dateOfData!))
             
-            Carbs
-            Breakfast: \(cellDailyData.breakfastData)
-            Snack 1: \(cellDailyData.snackOneData)
-            Lunch: \(cellDailyData.lunchData)
-            Snack 2: \(cellDailyData.snackTwoData)
-            Diner: \(cellDailyData.dinerData)
+            READINGS
+                Fasting:    \(cellDailyData.fastingData)
+                1:               \(cellDailyData.oneData)
+                2:               \(cellDailyData.twoData)
+                3:               \(cellDailyData.threeData)
+            
+            CARBS
+                Breakfast:  \(cellDailyData.breakfastData)
+                Snack 1:     \(cellDailyData.snackOneData)
+                Lunch:        \(cellDailyData.lunchData)
+                Snack 2:     \(cellDailyData.snackTwoData)
+                Diner:          \(cellDailyData.dinerData)
             """
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
+            
+            //delete from core and tableview and refresh and animate
+            //delete from context
+            let dataToRemove = self.items![indexPath.row]
+            Constants.CONTEXT.delete(dataToRemove)
+            
+            //save the context to core data
+            do {
+                try Constants.CONTEXT.save()
+            } catch {
+                print("Could not save the data")
+            }
+            
+            //refresh the table
+            self.fetchTheData()
+            
+//            completionHandler(true)
+        }
+        //set delete action properties
+        deleteAction.image = UIImage(systemName: "trash")
+        deleteAction.backgroundColor = Constants.crimsonRGB
+        
+        //apply the actions to the tableview
+        let swipe:UISwipeActionsConfiguration = UISwipeActionsConfiguration(actions: [deleteAction])
+        
+        return swipe
     }
 }
