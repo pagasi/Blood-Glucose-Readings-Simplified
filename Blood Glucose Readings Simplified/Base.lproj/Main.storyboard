@@ -58,7 +58,7 @@
                                                     <constraint firstAttribute="width" constant="62" id="OZU-rd-5E6"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -92,7 +92,7 @@
                                                     <constraint firstAttribute="width" constant="62" id="7gS-b2-3Rj"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -126,7 +126,7 @@
                                                     <constraint firstAttribute="width" constant="62" id="fiw-Hk-JEt"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -160,7 +160,7 @@
                                                     <constraint firstAttribute="width" constant="62" id="9T0-RM-MZK"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -172,7 +172,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="gRf-T9-LuC" userLabel="Carb VStack">
-                                <rect key="frame" x="19" y="409" width="376" height="330"/>
+                                <rect key="frame" x="19" y="420.5" width="376" height="330"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carbs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tas-tb-rii">
                                         <rect key="frame" x="0.0" y="0.0" width="376" height="40"/>
@@ -214,7 +214,7 @@
                                                     <constraint firstAttribute="width" constant="62" id="Vt4-er-1ZB"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zUQ-1W-oPL">
                                                 <rect key="frame" x="276" y="0.0" width="100" height="40"/>
@@ -268,7 +268,7 @@
                                                     <constraint firstAttribute="width" constant="62" id="HLf-CX-56y"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OWv-vD-Vu9">
                                                 <rect key="frame" x="276" y="0.0" width="100" height="40"/>
@@ -322,7 +322,7 @@
                                                     <constraint firstAttribute="width" constant="62" id="RnE-3q-GwO"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tfB-Kh-UPv">
                                                 <rect key="frame" x="276" y="0.0" width="100" height="40"/>
@@ -376,7 +376,7 @@
                                                     <constraint firstAttribute="width" constant="62" id="Jp0-Pe-Rqt"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HVz-Jh-jod">
                                                 <rect key="frame" x="276" y="0.0" width="100" height="40"/>
@@ -430,7 +430,7 @@
                                                     <constraint firstAttribute="width" constant="62" id="866-DX-uce"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6KT-6v-gpo">
                                                 <rect key="frame" x="276" y="0.0" width="100" height="40"/>
@@ -464,13 +464,6 @@
                                     <constraint firstAttribute="bottom" secondItem="3Eu-bx-3Ge" secondAttribute="bottom" id="wk6-5c-Rgq"/>
                                 </constraints>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="538-4o-wra">
-                                <rect key="frame" x="20" y="364" width="374" height="5"/>
-                                <color key="backgroundColor" red="0.023529411760000001" green="0.2784313725" blue="0.53725490200000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="5" id="fJf-Sf-NrK"/>
-                                </constraints>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6cE-4j-Qp1">
                                 <rect key="frame" x="334" y="812" width="60" height="30"/>
                                 <color key="backgroundColor" red="0.98823529409999999" green="0.62352941179999999" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -481,7 +474,7 @@
                                     <color key="titleColor" systemColor="labelColor"/>
                                 </state>
                                 <connections>
-                                    <segue destination="AKH-tr-0Un" kind="presentation" id="kfi-hy-FKp"/>
+                                    <action selector="historyPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gxk-0q-qXW"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="id4-VE-Ccy">
@@ -498,6 +491,13 @@
                                     <action selector="submitPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hWe-PY-Cya"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="538-4o-wra">
+                                <rect key="frame" x="20" y="375.5" width="374" height="5"/>
+                                <color key="backgroundColor" red="0.023529411760000001" green="0.2784313725" blue="0.53725490200000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="5" id="fJf-Sf-NrK"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.25882352939999997" green="0.47843137250000001" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -505,11 +505,10 @@
                             <constraint firstItem="F3i-fY-Nm7" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-20" id="4eA-S6-DBO"/>
                             <constraint firstItem="538-4o-wra" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9aI-EH-bEY"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="id4-VE-Ccy" secondAttribute="bottom" constant="20" id="BCB-rZ-VI8"/>
-                            <constraint firstItem="538-4o-wra" firstAttribute="top" secondItem="F3i-fY-Nm7" secondAttribute="bottom" constant="40" id="FEw-rp-fGJ"/>
                             <constraint firstItem="id4-VE-Ccy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JkL-A9-vyP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6cE-4j-Qp1" secondAttribute="trailing" constant="20" id="KKX-l2-6kb"/>
                             <constraint firstItem="F3i-fY-Nm7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="MgH-YT-oWD"/>
-                            <constraint firstItem="538-4o-wra" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="PVh-zX-fDe"/>
+                            <constraint firstItem="538-4o-wra" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-70" id="PVh-zX-fDe"/>
                             <constraint firstItem="538-4o-wra" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Xwe-1R-5GK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="538-4o-wra" secondAttribute="trailing" constant="20" id="Zff-rd-ukN"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="6cE-4j-Qp1" secondAttribute="bottom" constant="20" id="gXY-hI-lIY"/>
@@ -529,6 +528,7 @@
                         <outlet property="snack2TextField" destination="X82-g3-vnx" id="CGp-nP-NIV"/>
                         <outlet property="threeTextField" destination="q8k-7h-555" id="ZaR-1j-TJp"/>
                         <outlet property="twoTextField" destination="nnH-WS-o07" id="ZHP-s1-TET"/>
+                        <segue destination="AKH-tr-0Un" kind="presentation" identifier="VCtoHistorySegue" id="feV-84-JiP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

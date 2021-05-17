@@ -34,8 +34,24 @@ class ViewController: UIViewController {
         lunchTextField.delegate = self
         snack2TextField.delegate = self
         dinerTextField.delegate = self
+        
+        let arrayOfTextFields = [fastingTextField, oneTextField, twoTextField, threeTextField, breakfastTextField, snack1TextField, lunchTextField, snack2TextField, dinerTextField]
+        
+        arrayOfTextFields.forEach {$0!.placeholder = "###"}
+        
     }
     
+//    override func resignFirstResponder() -> Bool {
+//
+//    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        self.view.endEditing(true)
+        self.view.endEditing(true)
+    }
+    @IBAction func historyPressed(_ sender: Any) {
+        performSegue(withIdentifier: Constants.SEGUE_VC_TO_HISTORYVC, sender: self)
+    }
     @IBAction func submitPressed(_ sender: Any) {
         
         if fastingTextField.text != "" {
@@ -60,7 +76,7 @@ class ViewController: UIViewController {
         
         saveDataToCore(dataToSave: arrayOfInputs, dateToSave: currentDate)
         
-        
+        performSegue(withIdentifier: Constants.SEGUE_VC_TO_HISTORYVC, sender: self)
     }
     
     func saveDataToCore(dataToSave data: [Float], dateToSave date: Date) {
@@ -89,9 +105,12 @@ class ViewController: UIViewController {
 
 extension ViewController: UITextFieldDelegate {
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        textField.backgroundColor = Constants.yaleBlueRGB
-        return true
-    }
+
+    
+    
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        textField.resignFirstResponder()
+//        textField.backgroundColor = Constants.yaleBlueRGB
+//        return true
+//    }
 }

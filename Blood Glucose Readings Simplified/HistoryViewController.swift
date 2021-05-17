@@ -50,6 +50,8 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.HISTORY_CELL, for: indexPath) as! CustomTableViewCell
         
+        // clean the cell
+        cell.tableLabel.text = ""
         // get the data from the array and set the label
         let cellDailyData = items![indexPath.row]
         dateFormater.dateStyle = .full
