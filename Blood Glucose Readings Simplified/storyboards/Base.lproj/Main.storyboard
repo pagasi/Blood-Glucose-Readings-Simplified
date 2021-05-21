@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wYH-91-iNp">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
@@ -8,6 +8,23 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="r4t-Hf-b4w">
+            <objects>
+                <navigationController id="wYH-91-iNp" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WIJ-3E-bdw">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.023529411760000001" green="0.2784313725" blue="0.53725490200000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="QwA-hi-exY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="awl-x9-iNi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-771" y="68"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -17,7 +34,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="F3i-fY-Nm7" userLabel="BGR VStack">
-                                <rect key="frame" x="20" y="44" width="374" height="280"/>
+                                <rect key="frame" x="20" y="88" width="374" height="280"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blood Glucose Readings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GQL-9V-joi">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
@@ -518,6 +535,7 @@
                             <constraint firstItem="gRf-T9-LuC" firstAttribute="top" secondItem="538-4o-wra" secondAttribute="bottom" constant="40" id="zRv-1r-lRO"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="1hf-7f-MHd"/>
                     <connections>
                         <outlet property="breakfastTextField" destination="4Wm-iQ-ahh" id="8Ou-3O-fXj"/>
                         <outlet property="dinerTextField" destination="0Zs-0V-R3z" id="Mon-Af-SQ0"/>
@@ -528,7 +546,7 @@
                         <outlet property="snack2TextField" destination="X82-g3-vnx" id="CGp-nP-NIV"/>
                         <outlet property="threeTextField" destination="q8k-7h-555" id="ZaR-1j-TJp"/>
                         <outlet property="twoTextField" destination="nnH-WS-o07" id="ZHP-s1-TET"/>
-                        <segue destination="AKH-tr-0Un" kind="presentation" identifier="VCtoHistorySegue" id="feV-84-JiP"/>
+                        <segue destination="AKH-tr-0Un" kind="show" identifier="VCtoHistorySegue" id="feV-84-JiP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -540,12 +558,13 @@
             <objects>
                 <viewController id="AKH-tr-0Un" customClass="HistoryViewController" customModule="Blood_Glucose_Readings_Simplified" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8kd-Gm-xBL">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="t5p-ld-Pzp">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" red="0.25882352939999997" green="0.47843137250000001" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="sectionIndexBackgroundColor" red="0.25882352939999997" green="0.47843137250000001" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="historyCell" id="7t6-km-i8A" customClass="CustomTableViewCell" customModule="Blood_Glucose_Readings_Simplified" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="24.5" width="414" height="43"/>
@@ -568,6 +587,7 @@
                                                 <constraint firstItem="jY7-MG-JpS" firstAttribute="leading" secondItem="l3C-Ys-TFj" secondAttribute="leadingMargin" constant="20" id="heS-Zj-UVw"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.25882352939999997" green="0.47843137250000001" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="tableLabel" destination="jY7-MG-JpS" id="m8i-D0-BbS"/>
                                         </connections>
@@ -578,12 +598,13 @@
                         <viewLayoutGuide key="safeArea" id="LOq-fu-Nay"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="LOq-fu-Nay" firstAttribute="bottom" secondItem="t5p-ld-Pzp" secondAttribute="bottom" id="0ou-iZ-NqZ"/>
                             <constraint firstItem="t5p-ld-Pzp" firstAttribute="leading" secondItem="LOq-fu-Nay" secondAttribute="leading" id="1Jo-oq-Slt"/>
                             <constraint firstItem="t5p-ld-Pzp" firstAttribute="top" secondItem="LOq-fu-Nay" secondAttribute="top" id="PXA-6s-IJV"/>
                             <constraint firstItem="LOq-fu-Nay" firstAttribute="trailing" secondItem="t5p-ld-Pzp" secondAttribute="trailing" id="n2w-GP-hxP"/>
+                            <constraint firstItem="LOq-fu-Nay" firstAttribute="bottom" secondItem="t5p-ld-Pzp" secondAttribute="bottom" id="nxs-Gn-XY3"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="w8f-yB-67C"/>
                     <connections>
                         <outlet property="historyTableView" destination="t5p-ld-Pzp" id="4bd-Op-aBj"/>
                     </connections>
