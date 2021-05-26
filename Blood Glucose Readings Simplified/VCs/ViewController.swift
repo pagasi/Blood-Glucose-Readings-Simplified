@@ -7,9 +7,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-    
-    
+class ViewController: UIViewController, UIScrollViewDelegate, PassTouchesScrollViewDelegate, UITextFieldDelegate {
+
+
+    @IBOutlet weak var scrollView: PassTouchesScrollView!
     @IBOutlet weak var fastingTextField: UITextField!
     @IBOutlet weak var oneTextField: UITextField!
     @IBOutlet weak var twoTextField: UITextField!
@@ -23,18 +24,22 @@ class ViewController: UIViewController {
     let defaults = UserDefaults.standard
     var arrayOfInputs:[Float] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     var arrayOfTextFields: [UITextField?] = []
+    var isExpand:Bool = false
+    var activeTextField:UITextField? = nil
     
+    
+    //MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        runDelegates()
-
-        self.arrayOfTextFields = [fastingTextField, oneTextField, twoTextField, threeTextField, breakfastTextField, snack1TextField, lunchTextField, snack2TextField, dinerTextField]
         
-        arrayOfTextFields.forEach {$0!.placeholder = "###"}
+        runDelegates()
+        setupObservers()
+        setupArrayAndPlaceholders()
         fillTextFields(arrayOfTextFields)
         backgroundChanges()
     }
     
+    //MARK: delegates
     func runDelegates() {
         // setup delegates to self
         fastingTextField.delegate = self
@@ -46,8 +51,49 @@ class ViewController: UIViewController {
         lunchTextField.delegate = self
         snack2TextField.delegate = self
         dinerTextField.delegate = self
+        scrollView.delegate = self
+        scrollView.delegatePass = self
     }
-    //MARK: fill text fields func
+    
+    
+    //MARK: observers setup
+    func setupObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+    }
+    
+    @objc func keyboardAppear() {
+        if !isExpand {
+            self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.scrollView.frame.height + 250)
+            
+            if breakfastTextField.isFirstResponder == true || snack1TextField.isFirstResponder == true || lunchTextField.isFirstResponder == true || snack2TextField.isFirstResponder == true || dinerTextField.isFirstResponder == true {
+//             print(activeTextField)
+//                self.scrollView.scrollRectToVisible(dinerTextField.frame, animated: false)
+                self.scrollView.setContentOffset(CGPoint(x: 0.0, y: dinerTextField.frame.origin.y + 100), animated: true)
+            }
+            
+            self.isExpand = true
+        }
+    }
+    
+    @objc func keyboardDisappear() {
+        if isExpand == true {
+        self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.scrollView.frame.height - 250)
+        self.isExpand = false
+        }
+    }
+    
+    //MARK: array and placeholders
+    func setupArrayAndPlaceholders() {
+        self.arrayOfTextFields = [fastingTextField, oneTextField, twoTextField, threeTextField, breakfastTextField, snack1TextField, lunchTextField, snack2TextField, dinerTextField]
+        
+        arrayOfTextFields.forEach {$0!.placeholder = "###"}
+    }
+    
+    
+    //MARK: fill text fields
     func fillTextFields(_ fieldsToFill:[UITextField?]) {
         let dateInDefault = defaults.object(forKey: "dateDefault") as? Date
         let currentDateForFill = Date()
@@ -123,11 +169,45 @@ class ViewController: UIViewController {
     } // end of background changes func
     
     
-    //MARK: touchesBegan
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    //MARK: touchesBegan / tap
+    
+
+
+//@objc func singleTap(sender: UITapGestureRecognizer) {
+//    //resign all text fields
+//    self.view.endEditing(true)
+//
+//    //userdefaults save
+//    defaults.set(Date(), forKey: "dateDefault")
+//    defaults.set(Float(fastingTextField.text!) ?? 0.0, forKey: "fastingFloatDefault")
+//    defaults.set(Float(oneTextField.text!) ?? 0.0, forKey: "oneFloatDefault")
+//    defaults.set(Float(twoTextField.text!) ?? 0.0, forKey: "twoFloatDefault")
+//    defaults.set(Float(threeTextField.text!) ?? 0.0, forKey: "threeFloatDefault")
+//    defaults.set(Float(breakfastTextField.text!) ?? 0.0, forKey: "breakfastFloatDefault")
+//    defaults.set(Float(snack1TextField.text!) ?? 0.0, forKey: "snack1FloatDefault")
+//    defaults.set(Float(lunchTextField.text!) ?? 0.0, forKey: "lunchFloatDefault")
+//    defaults.set(Float(snack2TextField.text!) ?? 0.0, forKey: "snack2FloatDefault")
+//    defaults.set(Float(dinerTextField.text!) ?? 0.0, forKey: "dinerFloatDefault")
+//
+//    let fastingFloat = Float(fastingTextField.text!) ?? 0.0
+//    let oneFloat = Float(oneTextField.text!) ?? 0.0
+//    let twoFloat = Float(twoTextField.text!) ?? 0.0
+//    let threeFloat = Float(threeTextField.text!) ?? 0.0
+//    let breakfastFloat = Float(breakfastTextField.text!) ?? 0.0
+//    let snack1Float = Float(snack1TextField.text!) ?? 0.0
+//    let lunchFloat = Float(lunchTextField.text!) ?? 0.0
+//    let snack2Float = Float(snack2TextField.text!) ?? 0.0
+//    let dinerFloat = Float(dinerTextField.text!) ?? 0.0
+//
+//    self.arrayOfInputs = [fastingFloat, oneFloat, twoFloat, threeFloat, breakfastFloat, snack1Float, lunchFloat, snack2Float, dinerFloat]
+//    backgroundChanges()
+//
+//}
+    
+    func touchBegan() {
         //resign all text fields
         self.view.endEditing(true)
-        
+
         //userdefaults save
         defaults.set(Date(), forKey: "dateDefault")
         defaults.set(Float(fastingTextField.text!) ?? 0.0, forKey: "fastingFloatDefault")
@@ -139,7 +219,7 @@ class ViewController: UIViewController {
         defaults.set(Float(lunchTextField.text!) ?? 0.0, forKey: "lunchFloatDefault")
         defaults.set(Float(snack2TextField.text!) ?? 0.0, forKey: "snack2FloatDefault")
         defaults.set(Float(dinerTextField.text!) ?? 0.0, forKey: "dinerFloatDefault")
-        
+
         let fastingFloat = Float(fastingTextField.text!) ?? 0.0
         let oneFloat = Float(oneTextField.text!) ?? 0.0
         let twoFloat = Float(twoTextField.text!) ?? 0.0
@@ -149,10 +229,16 @@ class ViewController: UIViewController {
         let lunchFloat = Float(lunchTextField.text!) ?? 0.0
         let snack2Float = Float(snack2TextField.text!) ?? 0.0
         let dinerFloat = Float(dinerTextField.text!) ?? 0.0
-        
+
         self.arrayOfInputs = [fastingFloat, oneFloat, twoFloat, threeFloat, breakfastFloat, snack1Float, lunchFloat, snack2Float, dinerFloat]
         backgroundChanges()
+        print("touched!")
     }
+    
+    func touchMoved() {
+        print("touch moved")
+    }
+
     //MARK: historyPressed
     @IBAction func historyPressed(_ sender: Any) {
         performSegue(withIdentifier: Constants.SEGUE_VC_TO_HISTORYVC, sender: self)
@@ -198,15 +284,3 @@ class ViewController: UIViewController {
 }
 
 
-
-extension ViewController: UITextFieldDelegate {
-    
-    
-    
-    
-    //    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    //        textField.resignFirstResponder()
-    //        textField.backgroundColor = Constants.yaleBlueRGB
-    //        return true
-    //    }
-}

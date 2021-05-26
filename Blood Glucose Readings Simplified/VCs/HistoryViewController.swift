@@ -12,8 +12,13 @@ class HistoryViewController: UIViewController {
     
     
     let dateFormater = DateFormatter()
+    var items:[DailyData] = []
+    var last90DaysItems: [DailyData] = []
+    let today = Date()
+    
+    @IBOutlet weak var rollingAvgLabel: UILabel!
     @IBOutlet weak var historyTableView: UITableView!
-    var items:[DailyData]?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,10 +26,12 @@ class HistoryViewController: UIViewController {
         historyTableView.dataSource = self
         
         fetchTheData()
+        calculateRolling()
+        
     }
     
     func fetchTheData() {
-//        fetch the data from core data to display in the tableview
+        //        fetch the data from core data to display in the tableview
         do {
             self.items = try Constants.CONTEXT.fetch(DailyData.fetchRequest())
             
@@ -37,23 +44,63 @@ class HistoryViewController: UIViewController {
         }
         
     }
-
-
+    //MARK: calculate rolling avg
+    func calculateRolling() {
+        
+        var last90DaysReadings:[Float] = []
+        
+        //remove all but 90 days
+        //check that there is any data to work with
+        if self.items != [] {
+            //iterate through the data in the items array to check if its within 90 days
+            for eachDay in self.items {
+                let interval = DateInterval(start: eachDay.dateOfData!, end: self.today)
+                //if less than 90 days duration, add to last90DaysItems array
+                let lessThan90DaysCheck = interval.duration <= 7776000
+                if lessThan90DaysCheck == true {
+                    self.last90DaysItems.append(eachDay)
+                }
+            } // end loop through items array to check 90 days
+        }
+        last90DaysItems = self.items
+        if last90DaysItems != [] {
+            //fill last90DaysReadings with all the readings in the last90DaysItems array
+            for eachDay in last90DaysItems {
+                last90DaysReadings.append(eachDay.fastingData)
+                last90DaysReadings.append(eachDay.oneData)
+                last90DaysReadings.append(eachDay.twoData)
+                last90DaysReadings.append(eachDay.threeData)
+            }
+            // clean out any readings that are 0.0
+            last90DaysReadings.removeAll { $0 == 0.0 }
+            
+            //calculate the average readings in the last 90 days
+            let calculatedTotal = last90DaysReadings.reduce(0.0, +)
+            let calculatedAverage = calculatedTotal / Float(last90DaysReadings.count)
+            
+            //print to UI
+            rollingAvgLabel.text = "Three month rolling average: \(calculatedAverage.rounded())"
+        } else {
+            rollingAvgLabel.text = "Please submit data"
+        }
+    } // end calculateRolling()
+    
+    
 }
 
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items!.count
+        return items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.HISTORY_CELL, for: indexPath) as! CustomTableViewCell
         
-        // clean the cell
+        // MARK: clean the cell
         cell.tableLabel.text = ""
         // get the data from the array and set the label
-        let cellDailyData = items![indexPath.row]
+        let cellDailyData = items[indexPath.row]
         dateFormater.dateStyle = .full
         cell.tableLabel.text = """
             \(dateFormater.string(from: cellDailyData.dateOfData!))
@@ -80,7 +127,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
             
             //delete from core and tableview and refresh and animate
             //delete from context
-            let dataToRemove = self.items![indexPath.row]
+            let dataToRemove = self.items[indexPath.row]
             Constants.CONTEXT.delete(dataToRemove)
             
             //save the context to core data
@@ -93,7 +140,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
             //refresh the table
             self.fetchTheData()
             
-//            completionHandler(true)
+            //            completionHandler(true)
         }
         //set delete action properties
         deleteAction.image = UIImage(systemName: "trash")
