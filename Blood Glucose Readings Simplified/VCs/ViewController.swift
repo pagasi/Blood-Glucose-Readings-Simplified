@@ -126,17 +126,17 @@ class ViewController: UIViewController, UIScrollViewDelegate, PassTouchesScrollV
     
 
     
-    //MARK: backgroundChanges
+    //MARK: backgroundChanges red/green
     func backgroundChanges() {
         
-        if arrayOfInputs[0] > 120.0 {
+        if arrayOfInputs[0] > 130.0 {
             arrayOfTextFields[0]!.backgroundColor = Constants.crimsonRGB
         } else {
             fastingTextField.backgroundColor = Constants.greenSheenRGB
         } // end of background check for 0 (fasting)
         
         for index in 1...3 {
-        if arrayOfInputs[index] > 150.0 {
+        if arrayOfInputs[index] > 180.0 {
             arrayOfTextFields[index]!.backgroundColor = Constants.crimsonRGB
         } else {
             arrayOfTextFields[index]!.backgroundColor = Constants.greenSheenRGB
@@ -168,41 +168,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, PassTouchesScrollV
         
     } // end of background changes func
     
-    
-    //MARK: touchesBegan / tap
-    
-
-
-//@objc func singleTap(sender: UITapGestureRecognizer) {
-//    //resign all text fields
-//    self.view.endEditing(true)
-//
-//    //userdefaults save
-//    defaults.set(Date(), forKey: "dateDefault")
-//    defaults.set(Float(fastingTextField.text!) ?? 0.0, forKey: "fastingFloatDefault")
-//    defaults.set(Float(oneTextField.text!) ?? 0.0, forKey: "oneFloatDefault")
-//    defaults.set(Float(twoTextField.text!) ?? 0.0, forKey: "twoFloatDefault")
-//    defaults.set(Float(threeTextField.text!) ?? 0.0, forKey: "threeFloatDefault")
-//    defaults.set(Float(breakfastTextField.text!) ?? 0.0, forKey: "breakfastFloatDefault")
-//    defaults.set(Float(snack1TextField.text!) ?? 0.0, forKey: "snack1FloatDefault")
-//    defaults.set(Float(lunchTextField.text!) ?? 0.0, forKey: "lunchFloatDefault")
-//    defaults.set(Float(snack2TextField.text!) ?? 0.0, forKey: "snack2FloatDefault")
-//    defaults.set(Float(dinerTextField.text!) ?? 0.0, forKey: "dinerFloatDefault")
-//
-//    let fastingFloat = Float(fastingTextField.text!) ?? 0.0
-//    let oneFloat = Float(oneTextField.text!) ?? 0.0
-//    let twoFloat = Float(twoTextField.text!) ?? 0.0
-//    let threeFloat = Float(threeTextField.text!) ?? 0.0
-//    let breakfastFloat = Float(breakfastTextField.text!) ?? 0.0
-//    let snack1Float = Float(snack1TextField.text!) ?? 0.0
-//    let lunchFloat = Float(lunchTextField.text!) ?? 0.0
-//    let snack2Float = Float(snack2TextField.text!) ?? 0.0
-//    let dinerFloat = Float(dinerTextField.text!) ?? 0.0
-//
-//    self.arrayOfInputs = [fastingFloat, oneFloat, twoFloat, threeFloat, breakfastFloat, snack1Float, lunchFloat, snack2Float, dinerFloat]
-//    backgroundChanges()
-//
-//}
+    //MARK: touchesBegan
     
     func touchBegan() {
         //resign all text fields

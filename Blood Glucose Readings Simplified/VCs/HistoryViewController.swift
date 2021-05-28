@@ -10,7 +10,7 @@ import CoreData
 
 class HistoryViewController: UIViewController {
     
-    
+    let rounder = RoundingConversion()
     let dateFormater = DateFormatter()
     var items:[DailyData] = []
     var last90DaysItems: [DailyData] = []
@@ -77,9 +77,11 @@ class HistoryViewController: UIViewController {
             //calculate the average readings in the last 90 days
             let calculatedTotal = last90DaysReadings.reduce(0.0, +)
             let calculatedAverage = calculatedTotal / Float(last90DaysReadings.count)
-            
+            let a1cEstimate:Float = (calculatedAverage + 46.7)/28.7
+            let roundedEst = rounder.floatConversion(floatToConvert: a1cEstimate)
+            let roundedCalculatedAvg = rounder.floatConversion(floatToConvert: calculatedAverage)
             //print to UI
-            rollingAvgLabel.text = "Three month rolling average: \(calculatedAverage.rounded())"
+            rollingAvgLabel.text = "Three month rolling average: \(roundedCalculatedAvg) \n Estimated A1C: \(roundedEst)"
         } else {
             rollingAvgLabel.text = "Please submit data"
         }

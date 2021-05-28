@@ -22,6 +22,7 @@
 		6FECBC50264AD218000D9989 /* DailyData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FECBC4E264AD218000D9989 /* DailyData+CoreDataClass.swift */; };
 		6FECBC51264AD218000D9989 /* DailyData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FECBC4F264AD218000D9989 /* DailyData+CoreDataProperties.swift */; };
 		6FECBC53264C22DC000D9989 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FECBC52264C22DC000D9989 /* CustomTableViewCell.swift */; };
+		6FF9F7BD2660504200FA5E74 /* RoundingConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF9F7BC2660504200FA5E74 /* RoundingConversion.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		6FECBC4E264AD218000D9989 /* DailyData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DailyData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6FECBC4F264AD218000D9989 /* DailyData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DailyData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6FECBC52264C22DC000D9989 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		6FF9F7BC2660504200FA5E74 /* RoundingConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundingConversion.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 			children = (
 				6F9603D82655564F00EF67B6 /* DateExtension.swift */,
 				6F9603E02658017700EF67B6 /* PassTouchesScrollView.swift */,
+				6FF9F7BC2660504200FA5E74 /* RoundingConversion.swift */,
 			);
 			path = "extensions-subclasses";
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 				6F4F22C8263AEDA20005FC0E /* Constants.swift in Sources */,
 				6F9603D92655564F00EF67B6 /* DateExtension.swift in Sources */,
 				6FECBC50264AD218000D9989 /* DailyData+CoreDataClass.swift in Sources */,
+				6FF9F7BD2660504200FA5E74 /* RoundingConversion.swift in Sources */,
 				6F4F22B9263AECCB0005FC0E /* Blood_Glucose_Readings_Simplified.xcdatamodeld in Sources */,
 				6F4F22B3263AECCB0005FC0E /* ViewController.swift in Sources */,
 				6FECBC45264989A1000D9989 /* Notes.swift in Sources */,
