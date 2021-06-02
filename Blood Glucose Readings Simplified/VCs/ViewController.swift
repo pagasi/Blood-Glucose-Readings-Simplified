@@ -26,7 +26,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, PassTouchesScrollV
     var arrayOfTextFields: [UITextField?] = []
     var isExpand:Bool = false
     var activeTextField:UITextField? = nil
-    
+    let coreWorkForVC = CoreWork()
     
     //MARK: viewDidLoad
     override func viewDidLoad() {
@@ -93,23 +93,15 @@ class ViewController: UIViewController, UIScrollViewDelegate, PassTouchesScrollV
     }
     
     
-    //MARK: fill text fields
+    //MARK: check date, fill textFields
     func fillTextFields(_ fieldsToFill:[UITextField?]) {
         let dateInDefault = defaults.object(forKey: "dateDefault") as? Date
         let currentDateForFill = Date()
+        if dateInDefault == nil {
+            defaults.set(Date(), forKey: "dateDefault")
+            return}
         if dateInDefault?.stringDateOnly() == currentDateForFill.stringDateOnly() {
-            let reloadedFastingTxt = defaults.float(forKey: "fastingFloatDefault")
-            let reloaded1Txt = defaults.float(forKey: "oneFloatDefault")
-            let reloaded2Txt = defaults.float(forKey: "twoFloatDefault")
-            let reloaded3Txt = defaults.float(forKey: "threeFloatDefault")
-            let reloadedBreakfastTxt = defaults.float(forKey: "breakfastFloatDefault")
-            let reloadedSnack1Txt = defaults.float(forKey: "snack1FloatDefault")
-            let reloadedLunchTxt = defaults.float(forKey: "lunchFloatDefault")
-            let reloadedSnack2Txt = defaults.float(forKey: "snack2FloatDefault")
-            let reloadedDinerTxt = defaults.float(forKey: "dinerFloatDefault")
-            
-            let arrayOfReloads = [reloadedFastingTxt, reloaded1Txt, reloaded2Txt, reloaded3Txt, reloadedBreakfastTxt, reloadedSnack1Txt, reloadedLunchTxt, reloadedSnack2Txt, reloadedDinerTxt]
-            
+            let arrayOfReloads = reloadDataFromDefault()
             for index in 0...8 {
                 self.arrayOfInputs[index] = arrayOfReloads[index]
                 if arrayOfReloads[index] != 0.0 {
@@ -117,14 +109,29 @@ class ViewController: UIViewController, UIScrollViewDelegate, PassTouchesScrollV
                 }
             }
         } else {
-
-            
-            
-//            MARK:  TODO: set alert to save yesterday's data to history
+//            MARK:  Save yesterday's data to history
+            let arrayOfReloads = reloadDataFromDefault()
+            coreWorkForVC.saveDataToCore(dataToSave: arrayOfReloads, dateToSave: dateInDefault!)
+            //refresh dateDefault
+            defaults.set(Date(), forKey: "dateDefault")
         }
     }
     
-
+    func reloadDataFromDefault() -> [Float] {
+        let reloadedFastingTxt = defaults.float(forKey: "fastingFloatDefault")
+        let reloaded1Txt = defaults.float(forKey: "oneFloatDefault")
+        let reloaded2Txt = defaults.float(forKey: "twoFloatDefault")
+        let reloaded3Txt = defaults.float(forKey: "threeFloatDefault")
+        let reloadedBreakfastTxt = defaults.float(forKey: "breakfastFloatDefault")
+        let reloadedSnack1Txt = defaults.float(forKey: "snack1FloatDefault")
+        let reloadedLunchTxt = defaults.float(forKey: "lunchFloatDefault")
+        let reloadedSnack2Txt = defaults.float(forKey: "snack2FloatDefault")
+        let reloadedDinerTxt = defaults.float(forKey: "dinerFloatDefault")
+        
+        let arrayOfReloadsForReloadFromDefaultFunc = [reloadedFastingTxt, reloaded1Txt, reloaded2Txt, reloaded3Txt, reloadedBreakfastTxt, reloadedSnack1Txt, reloadedLunchTxt, reloadedSnack2Txt, reloadedDinerTxt]
+        
+        return arrayOfReloadsForReloadFromDefaultFunc
+    }
     
     //MARK: backgroundChanges red/green
     func backgroundChanges() {
@@ -175,7 +182,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, PassTouchesScrollV
         self.view.endEditing(true)
 
         //userdefaults save
-        defaults.set(Date(), forKey: "dateDefault")
+//        defaults.set(Date(), forKey: "dateDefault")
         defaults.set(Float(fastingTextField.text!) ?? 0.0, forKey: "fastingFloatDefault")
         defaults.set(Float(oneTextField.text!) ?? 0.0, forKey: "oneFloatDefault")
         defaults.set(Float(twoTextField.text!) ?? 0.0, forKey: "twoFloatDefault")
@@ -213,40 +220,14 @@ class ViewController: UIViewController, UIScrollViewDelegate, PassTouchesScrollV
     
     //MARK: submitPressed
     @IBAction func submitPressed(_ sender: Any) {
-        
-        if fastingTextField.text != "" {
-            print(fastingTextField.text!)
-        }
+
         let currentDate = Date()
             
-        print(arrayOfInputs)
-        print(currentDate)
-        
-        saveDataToCore(dataToSave: arrayOfInputs, dateToSave: currentDate)
+        coreWorkForVC.saveDataToCore(dataToSave: arrayOfInputs, dateToSave: currentDate)
         
         performSegue(withIdentifier: Constants.SEGUE_VC_TO_HISTORYVC, sender: self)
     }
-    //MARK: saveDataToCore
-    func saveDataToCore(dataToSave data: [Float], dateToSave date: Date) {
-        //create a new DailyData object
-        let newSave = DailyData(context: Constants.CONTEXT)
-        newSave.dateOfData = date
-        newSave.fastingData = data[0]
-        newSave.oneData = data[1]
-        newSave.twoData = data[2]
-        newSave.threeData = data[3]
-        newSave.breakfastData = data[4]
-        newSave.snackOneData = data[5]
-        newSave.lunchData = data[6]
-        newSave.snackTwoData = data[7]
-        newSave.dinerData = data[8]
-        //save the data
-        do {
-            try Constants.CONTEXT.save()
-        } catch {
-            print("Could not save the data")
-        }
-    }
+
 }
 
 

@@ -15,11 +15,12 @@ class HistoryViewController: UIViewController {
     var items:[DailyData] = []
     var last90DaysItems: [DailyData] = []
     let today = Date()
+    let coreWorkForHVC = CoreWork()
     
     @IBOutlet weak var rollingAvgLabel: UILabel!
     @IBOutlet weak var historyTableView: UITableView!
     
-    
+    //MARK: viewdidload
     override func viewDidLoad() {
         super.viewDidLoad()
         historyTableView.delegate = self
@@ -29,12 +30,12 @@ class HistoryViewController: UIViewController {
         calculateRolling()
         
     }
-    
+    //MARK: fetchTheData
     func fetchTheData() {
         //        fetch the data from core data to display in the tableview
         do {
             self.items = try Constants.CONTEXT.fetch(DailyData.fetchRequest())
-            
+            self.items.reverse()
             DispatchQueue.main.async {
                 self.historyTableView.reloadData()
             }
@@ -89,7 +90,7 @@ class HistoryViewController: UIViewController {
     
     
 }
-
+//MARK: tableview extensions
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -123,6 +124,25 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
         return cell
     }
     
+    //MARK: leading swipe "edit"
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let editAction = UIContextualAction(style: .normal, title: "Edit") { (action, view, completionHandler) in
+//            pull up alert/child for editing
+//            delete old entry
+            //save new entry
+//            coreWorkForHVC.saveDataToCore(dataToSave: <#T##[Float]#>, dateToSave: <#T##Date#>)
+//            refresh tableview
+        }
+        editAction.image = UIImage(systemName: "pencil")
+        editAction.backgroundColor = Constants.yaleBlueRGB
+        
+        //apply the actions to the tableview
+        let swipe:UISwipeActionsConfiguration = UISwipeActionsConfiguration(actions: [editAction])
+        
+        return swipe
+    }
+    //MARK:  trailing swipe "trash"
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
