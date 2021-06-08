@@ -9,7 +9,9 @@ import UIKit
 
 class ViewController: UIViewController, UIScrollViewDelegate, PassTouchesScrollViewDelegate, UITextFieldDelegate {
 
-
+    @IBOutlet weak var glucoseHeaderLabel: UILabel!
+    @IBOutlet weak var carbsHeaderLabel: UILabel!
+    
     @IBOutlet weak var scrollView: PassTouchesScrollView!
     @IBOutlet weak var fastingTextField: UITextField!
     @IBOutlet weak var oneTextField: UITextField!
@@ -21,18 +23,27 @@ class ViewController: UIViewController, UIScrollViewDelegate, PassTouchesScrollV
     @IBOutlet weak var snack2TextField: UITextField!
     @IBOutlet weak var dinerTextField: UITextField!
     
+    @IBOutlet weak var breakfastGraphView: UIView!
+    @IBOutlet weak var snack1GraphView: UIView!
+    @IBOutlet weak var lunchGraphView: UIView!
+    @IBOutlet weak var snack2GraphView: UIView!
+    @IBOutlet weak var dinnerGraphView: UIView!
+    
+    
     let defaults = UserDefaults.standard
     var arrayOfInputs:[Float] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     var arrayOfTextFields: [UITextField?] = []
     var isExpand:Bool = false
     var activeTextField:UITextField? = nil
     let coreWorkForVC = CoreWork()
+    let animateGraphForVC = AnimateGraph()
     
     //MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
         runDelegates()
+        setupLabels()
         setupObservers()
         setupArrayAndPlaceholders()
         fillTextFields(arrayOfTextFields)
@@ -55,6 +66,23 @@ class ViewController: UIViewController, UIScrollViewDelegate, PassTouchesScrollV
         scrollView.delegatePass = self
     }
     
+    //MARK: labels setup
+    func setupLabels() {
+//        glucoseHeaderLabel.translatesAutoresizingMaskIntoConstraints = false
+//        glucoseHeaderLabel.layer.cornerRadius = 10
+//        glucoseHeaderLabel.layer.backgroundColor = Constants.sandyBrownRGB.cgColor
+//        glucoseHeaderLabel.layer.shadowOffset = CGSize(width: 2, height: 2)
+//        glucoseHeaderLabel.layer.shadowColor = UIColor.black.cgColor
+//        glucoseHeaderLabel.layer.shadowRadius = 5
+//        glucoseHeaderLabel.layer.shadowOpacity = 1
+        
+//        carbsHeaderLabel.layer.cornerRadius = 20
+//        carbsHeaderLabel.layer.backgroundColor = Constants.sandyBrownRGB.cgColor
+//        carbsHeaderLabel.layer.shadowOffset = CGSize(width: 2, height: 2)
+//        carbsHeaderLabel.layer.shadowColor = UIColor.black.cgColor
+//        carbsHeaderLabel.layer.shadowRadius = 5
+//        carbsHeaderLabel.layer.shadowOpacity = 1
+    }
     
     //MARK: observers setup
     func setupObservers() {
@@ -205,6 +233,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, PassTouchesScrollV
 
         self.arrayOfInputs = [fastingFloat, oneFloat, twoFloat, threeFloat, breakfastFloat, snack1Float, lunchFloat, snack2Float, dinerFloat]
         backgroundChanges()
+        animateGraphForVC.drawPaths(onView: breakfastGraphView)
         print("touched!")
     }
     

@@ -437,7 +437,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yw9-RO-0SM">
                                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="40"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diner" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awe-fZ-lyM">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dinner" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awe-fZ-lyM">
                                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="40"/>
                                                                         <color key="backgroundColor" red="0.25882352939999997" green="0.47843137250000001" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -569,13 +569,20 @@
                     </view>
                     <navigationItem key="navigationItem" id="1hf-7f-MHd"/>
                     <connections>
+                        <outlet property="breakfastGraphView" destination="zUQ-1W-oPL" id="zHb-xz-OlV"/>
                         <outlet property="breakfastTextField" destination="4Wm-iQ-ahh" id="8Ou-3O-fXj"/>
+                        <outlet property="carbsHeaderLabel" destination="Tas-tb-rii" id="wIP-Tv-Tpz"/>
                         <outlet property="dinerTextField" destination="0Zs-0V-R3z" id="Mon-Af-SQ0"/>
+                        <outlet property="dinnerGraphView" destination="6KT-6v-gpo" id="vLE-wU-OqU"/>
                         <outlet property="fastingTextField" destination="4Zv-rx-ue5" id="I9m-pt-2aX"/>
+                        <outlet property="glucoseHeaderLabel" destination="GQL-9V-joi" id="hfA-bv-TxH"/>
+                        <outlet property="lunchGraphView" destination="tfB-Kh-UPv" id="JQ6-0p-nkj"/>
                         <outlet property="lunchTextField" destination="XfA-Ix-L2u" id="9Lf-4I-EV9"/>
                         <outlet property="oneTextField" destination="Sck-kK-mQj" id="txP-Yd-8VE"/>
                         <outlet property="scrollView" destination="sbU-jr-J9m" id="kTn-BU-CN3"/>
+                        <outlet property="snack1GraphView" destination="OWv-vD-Vu9" id="P6g-6F-XVI"/>
                         <outlet property="snack1TextField" destination="qTA-kA-u0p" id="E0K-oL-51v"/>
+                        <outlet property="snack2GraphView" destination="HVz-Jh-jod" id="fOM-ll-XnG"/>
                         <outlet property="snack2TextField" destination="X82-g3-vnx" id="CGp-nP-NIV"/>
                         <outlet property="threeTextField" destination="q8k-7h-555" id="ZaR-1j-TJp"/>
                         <outlet property="twoTextField" destination="nnH-WS-o07" id="ZHP-s1-TET"/>

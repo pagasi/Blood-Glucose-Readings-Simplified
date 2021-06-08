@@ -30,6 +30,24 @@ class CoreWork {
         }
     }
     
-    
-    
+    //MARK: fetchTheData
+    func fetchTheData() -> [DailyData] {
+        //        fetch the data from core data to display in the tableview
+        var fetchedItems: [DailyData] = []
+        do {
+            
+            fetchedItems = try Constants.CONTEXT.fetch(DailyData.fetchRequest())
+            fetchedItems.reverse()
+
+            
+        } catch  {
+            print("Error fetching data")
+        }
+        return fetchedItems
+    }
+
+    //MARK: update and delete data
+    func updateAndDeleteData() {
+        
+    }
 }
