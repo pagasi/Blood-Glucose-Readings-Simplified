@@ -130,6 +130,8 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
             let alert = UIAlertController(title: "Edit data for \(dateOfEntry ?? "")", message: "Hello Beautiful", preferredStyle: .alert)
             
             //add fields
+            
+            
             alert.addTextField { fastingField in
                 if self.items[indexPath.row].fastingData == 0.0 {
                     fastingField.placeholder = "Fasting:" } else {
@@ -201,7 +203,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource{
                 dinerField.keyboardType = .decimalPad
             }
             
-            //add submit buttons
+///add submit buttons
             alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
             alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { action in
                 //capture fields

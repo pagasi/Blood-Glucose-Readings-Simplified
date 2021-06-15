@@ -12,7 +12,7 @@ struct Constants {
     
     // MARK:  cells
     
-    static var HISTORY_CELL = "historyCell"
+    static let HISTORY_CELL = "historyCell"
     
     
     
@@ -29,11 +29,11 @@ struct Constants {
     
     //MARK:   Colors
     
-    static var yaleBlueRGB = UIColor.init(red: 6/255, green: 71/255, blue: 137/255, alpha: 1)
-    static var greenSheenRGB = UIColor.init(red: 117/255, green: 187/255, blue: 167/255, alpha: 1)
-    static var steelBlueRGB = UIColor.init(red: 66/255, green: 122/255, blue: 161/255, alpha: 1)
-    static var crimsonRGB = UIColor.init(red: 148/255, green: 28/255, blue: 47/255, alpha: 1)
-    static var sandyBrownRGB = UIColor.init(red: 252/255, green: 159/255, blue: 91/255, alpha: 1)
+    static let yaleBlueRGB = UIColor.init(red: 6/255, green: 71/255, blue: 137/255, alpha: 1)
+    static let greenSheenRGB = UIColor.init(red: 117/255, green: 187/255, blue: 167/255, alpha: 1)
+    static let steelBlueRGB = UIColor.init(red: 66/255, green: 122/255, blue: 161/255, alpha: 1)
+    static let crimsonRGB = UIColor.init(red: 148/255, green: 28/255, blue: 47/255, alpha: 1)
+    static let sandyBrownRGB = UIColor.init(red: 252/255, green: 159/255, blue: 91/255, alpha: 1)
     
     //[{"name":"Yale Blue","hex":"064789","rgb":[6,71,137],"cmyk":[96,48,0,46],"hsb":[210,96,54],"hsl":[210,92,28],"lab":[30,9,-42]},
     

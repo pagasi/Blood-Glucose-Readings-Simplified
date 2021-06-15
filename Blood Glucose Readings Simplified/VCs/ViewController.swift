@@ -23,11 +23,24 @@ class ViewController: UIViewController, UIScrollViewDelegate, PassTouchesScrollV
     @IBOutlet weak var snack2TextField: UITextField!
     @IBOutlet weak var dinerTextField: UITextField!
     
+    @IBOutlet weak var breakfastCarbsRemainingText: UILabel!
+    @IBOutlet weak var snack1CarbsRemainingText: UILabel!
+    @IBOutlet weak var lunchCarbsRemainingText: UILabel!
+    @IBOutlet weak var snack2CarbsRemainingText: UILabel!
+    @IBOutlet weak var dinerCarbsRemainingText: UILabel!
+    
+    
     @IBOutlet weak var breakfastGraphView: UIView!
     @IBOutlet weak var snack1GraphView: UIView!
     @IBOutlet weak var lunchGraphView: UIView!
     @IBOutlet weak var snack2GraphView: UIView!
     @IBOutlet weak var dinnerGraphView: UIView!
+    
+    @IBOutlet weak var breakfastProgressBar: UIProgressView!
+    @IBOutlet weak var snack1ProgressBar: UIProgressView!
+    @IBOutlet weak var lunchProgressBar: UIProgressView!
+    @IBOutlet weak var snack2ProgressBar: UIProgressView!
+    @IBOutlet weak var dinnerProgressBar: UIProgressView!
     
     
     let defaults = UserDefaults.standard
@@ -37,17 +50,19 @@ class ViewController: UIViewController, UIScrollViewDelegate, PassTouchesScrollV
     var activeTextField:UITextField? = nil
     let coreWorkForVC = CoreWork()
     let animateGraphForVC = AnimateGraph()
+    let ProgressBarUpdateForVC = ProgressBarUpdate()
     
     //MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
         runDelegates()
-        setupLabels()
+        initialSetup()
         setupObservers()
         setupArrayAndPlaceholders()
         fillTextFields(arrayOfTextFields)
         backgroundChanges()
+      
     }
     
     //MARK: delegates
@@ -66,8 +81,33 @@ class ViewController: UIViewController, UIScrollViewDelegate, PassTouchesScrollV
         scrollView.delegatePass = self
     }
     
-    //MARK: labels setup
-    func setupLabels() {
+    //MARK: setup
+    func initialSetup() {
+        
+        
+        //MARK: progress bar setup
+        breakfastProgressBar.progressViewStyle = .default
+        breakfastProgressBar.trackTintColor = Constants.yaleBlueRGB
+        breakfastCarbsRemainingText.textColor = .white
+        
+        snack1ProgressBar.progressViewStyle = .default
+        snack1ProgressBar.trackTintColor = Constants.yaleBlueRGB
+        snack1CarbsRemainingText.textColor = .white
+        
+        lunchProgressBar.progressViewStyle = .default
+        lunchProgressBar.trackTintColor = Constants.yaleBlueRGB
+        lunchCarbsRemainingText.textColor = .white
+        
+        snack2ProgressBar.progressViewStyle = .default
+        snack2ProgressBar.trackTintColor = Constants.yaleBlueRGB
+        snack2CarbsRemainingText.textColor = .white
+        
+        dinnerProgressBar.progressViewStyle = .default
+        dinnerProgressBar.trackTintColor = Constants.yaleBlueRGB
+        dinerCarbsRemainingText.textColor = .white
+
+        
+        
 //        glucoseHeaderLabel.translatesAutoresizingMaskIntoConstraints = false
 //        glucoseHeaderLabel.layer.cornerRadius = 10
 //        glucoseHeaderLabel.layer.backgroundColor = Constants.sandyBrownRGB.cgColor
@@ -82,6 +122,9 @@ class ViewController: UIViewController, UIScrollViewDelegate, PassTouchesScrollV
 //        carbsHeaderLabel.layer.shadowColor = UIColor.black.cgColor
 //        carbsHeaderLabel.layer.shadowRadius = 5
 //        carbsHeaderLabel.layer.shadowOpacity = 1
+        
+        
+
     }
     
     //MARK: observers setup
@@ -179,29 +222,53 @@ class ViewController: UIViewController, UIScrollViewDelegate, PassTouchesScrollV
         } // end of loop background check for 1-3 (blood glucose check 1,2,3)
         
         let arrayOf30GramCaps = [arrayOfInputs[4], arrayOfInputs[6], arrayOfInputs[8]]
+        let arrayOf30CapProgressBars = [breakfastProgressBar, lunchProgressBar, dinnerProgressBar]
         let arrayOf30GramTextFields = [arrayOfTextFields[4], arrayOfTextFields[6], arrayOfTextFields[8]]
+        
         for index in 0...2 {
             if arrayOf30GramCaps[index] > 30.0 {
                 arrayOf30GramTextFields[index]!.backgroundColor = Constants.crimsonRGB
+                arrayOf30CapProgressBars[index]?.progressTintColor = Constants.crimsonRGB
             } else {
                 arrayOf30GramTextFields[index]!.backgroundColor = Constants.greenSheenRGB
+                arrayOf30CapProgressBars[index]?.progressTintColor = Constants.greenSheenRGB
             }
             
         } // end of loop background check for 4,6,8 (breakfast, lunch, and diner)
         
         if arrayOfInputs[5] > 15 {
             arrayOfTextFields[5]!.backgroundColor = Constants.crimsonRGB
+            snack1ProgressBar.progressTintColor = Constants.crimsonRGB
         } else {
             arrayOfTextFields[5]!.backgroundColor = Constants.greenSheenRGB
+            snack1ProgressBar.progressTintColor = Constants.greenSheenRGB
         }
         
         if arrayOfInputs[7] > 15 {
             arrayOfTextFields[7]!.backgroundColor = Constants.crimsonRGB
+            snack2ProgressBar.progressTintColor = Constants.crimsonRGB
         } else {
             arrayOfTextFields[7]!.backgroundColor = Constants.greenSheenRGB
+            snack2ProgressBar.progressTintColor = Constants.greenSheenRGB
         }
         
+        //MARK: update progress bars
+        ProgressBarUpdateForVC.update(bar: breakfastProgressBar, withFloat: arrayOfInputs[4], withCap: 30.0)
+        ProgressBarUpdateForVC.update(bar: snack1ProgressBar, withFloat: arrayOfInputs[5], withCap: 15.0)
+        ProgressBarUpdateForVC.update(bar: lunchProgressBar, withFloat: arrayOfInputs[6], withCap: 30.0)
+        ProgressBarUpdateForVC.update(bar: snack2ProgressBar, withFloat: arrayOfInputs[7], withCap: 15.0)
+        ProgressBarUpdateForVC.update(bar: dinnerProgressBar    , withFloat: arrayOfInputs[8], withCap: 30.0)
+        
+        //MARK: update carb label
+        breakfastCarbsRemainingText.text = "\(30 - arrayOfInputs[4]) carbs remaining"
+        snack1CarbsRemainingText.text = "\(15 - arrayOfInputs[5]) carbs remaining"
+        lunchCarbsRemainingText.text = "\(30 - arrayOfInputs[6]) carbs remaining"
+        snack2CarbsRemainingText.text = "\(15 - arrayOfInputs[7]) carbs remaining"
+        dinerCarbsRemainingText.text = "\(30 - arrayOfInputs[8]) carbs remaining"
+        
+        
     } // end of background changes func
+    
     
     //MARK: touchesBegan
     
@@ -233,7 +300,8 @@ class ViewController: UIViewController, UIScrollViewDelegate, PassTouchesScrollV
 
         self.arrayOfInputs = [fastingFloat, oneFloat, twoFloat, threeFloat, breakfastFloat, snack1Float, lunchFloat, snack2Float, dinerFloat]
         backgroundChanges()
-        animateGraphForVC.drawPaths(onView: breakfastGraphView)
+//        animateGraphForVC.drawPaths(onView: breakfastGraphView)
+
         print("touched!")
     }
     
